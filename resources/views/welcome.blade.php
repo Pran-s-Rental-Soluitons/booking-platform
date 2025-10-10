@@ -10,7 +10,7 @@
                         <form>
                             <div class="row g-3 align-items-end">
                                 <!-- Departure City -->
-                                <div class="col-12 col-md-6 col-lg-3">
+                                <div class="col-12 col-lg-3">
                                     <label for="from-city" class="form-label small text-muted">From</label>
                                     <div class="input-with-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <!-- Destination City -->
-                                <div class="col-12 col-md-6 col-lg-3">
+                                <div class="col-12 col-lg-3">
                                     <label for="to-city" class="form-label small text-muted">To</label>
                                     <div class="input-with-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <!-- Travel Date -->
-                                <div class="col-12 col-md-6 col-lg-3">
+                                <div class="col-12 col-lg-3">
                                     <label for="travel-date" class="form-label small text-muted">Travel Date</label>
                                     <div class="input-with-icon">
                                         <!-- SVG icon instead of <i> -->
@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 <!-- Passengers -->
-                                <div class="col-12 col-md-6 col-lg-3">
+                                <div class="col-12 col-lg-3">
                                     <label for="passengers" class="form-label small text-muted">Passengers</label>
                                     <div class="input-with-icon">
                                         <!-- SVG icon instead of <i> -->
@@ -104,8 +104,8 @@
             <h2 class="text-center fw-bold mb-5" style="font-size:2.5rem;">Popular Routes</h2>
             <div class="row g-4 justify-content-center">
                 <!-- Route Card 1 -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="route-card p-4 h-100 rounded-4 border bg-white">
+                <div class="col-12 col-lg-3">
+                    <div class="route-card p-4 h-100 rounded-3 border bg-white">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <div class="fw-semibold" style="font-size:1.15rem;">Mumbai</div>
@@ -121,8 +121,8 @@
                     </div>
                 </div>
                 <!-- Route Card 2 -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="route-card p-4 h-100 rounded-4 border bg-white">
+                <div class="col-12 col-lg-3">
+                    <div class="route-card p-4 h-100 rounded-3 border bg-white">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <div class="fw-semibold" style="font-size:1.15rem;">Delhi</div>
@@ -138,8 +138,8 @@
                     </div>
                 </div>
                 <!-- Route Card 3 -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="route-card p-4 h-100 rounded-4 border bg-white">
+                <div class="col-12 col-lg-3">
+                    <div class="route-card p-4 h-100 rounded-3 border bg-white">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <div class="fw-semibold" style="font-size:1.15rem;">Bangalore</div>
@@ -155,8 +155,8 @@
                     </div>
                 </div>
                 <!-- Route Card 4 -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="route-card p-4 h-100 rounded-4 border bg-white">
+                <div class="col-12 col-lg-3">
+                    <div class="route-card p-4 h-100 rounded-3 border bg-white">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <div class="fw-semibold" style="font-size:1.15rem;">Hyderabad</div>

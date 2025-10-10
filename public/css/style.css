@@ -1,0 +1,192 @@
+:root {
+    --purple-1: #7b2cff;
+    --purple-2: #6a18eb;
+    --muted: #6b7280;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%);
+    color: #1f2937;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*  SEARCH CARD styling */
+.search-card {
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(31, 24, 57, 0.06);
+    overflow: visible;
+}
+
+/* ambient large shadow below the card (pseudo-element) */
+.search-card::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -46px;
+    width: 85%;
+    height: 70px;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(31, 24, 57, 0.10) 0%, rgba(31, 24, 57, 0.04) 35%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(18px);
+    z-index: -1;
+    border-radius: 50%;
+}
+
+/* labels smaller and muted like screenshot */
+.search-card .form-label {
+    display: block;
+    margin-bottom: .45rem;
+}
+
+/* Inputs + Icons */
+.input-with-icon {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.05rem;
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+/* make space for the icon inside inputs */
+.input-with-icon .form-control,
+.input-with-icon .form-select {
+    padding-left: 44px;
+    height: 52px;
+    border-radius: 10px;
+    border: 1px solid #e6e9ee;
+    box-shadow: none;
+}
+
+/* change placeholder color */
+.input-with-icon .form-control::placeholder {
+    color: #9aa0a8;
+}
+
+/* select height alignment */
+.input-with-icon .form-select {
+    padding-right: 2.2rem;
+}
+
+/* slight focus style */
+.input-with-icon .form-control:focus,
+.input-with-icon .form-select:focus {
+    outline: 1px solid #111;
+    outline-offset: 1px;
+    box-shadow: 0 6px 6px rgba(11, 13, 34, 0.04), 0 0 0 2px #111;
+    border-color: rgb(147 51 234);
+}
+
+/* reduce icon opacity on disabled */
+.input-with-icon .form-control:disabled~.input-icon {
+    opacity: .5;
+}
+
+/* High contrast for disabled state */
+.input-with-icon .form-control:disabled,
+.input-with-icon .form-select:disabled {
+    background: #f3f4f6;
+    color: #b0b3b8;
+    border-color: #e5e7eb;
+    cursor: not-allowed;
+}
+
+/* Search button */
+.btn-search {
+    background: rgb(147 51 234);
+    color: #fff;
+    border: 0;
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 24px rgba(139, 92, 246, 0.25);
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: 600;
+    justify-content: center;
+}
+
+.btn-search:hover,
+.btn-search:focus,
+.btn-search:active {
+    background: #8217e6;
+    color: #fff;
+    outline: none;
+}
+
+.btn-search:active {
+    background: rgb(147 51 234);
+}
+
+.btn-search .bi {
+    font-size: 1.25rem;
+}
+
+/* Popular Routes */
+.route-card {
+    /* transition: box-shadow 0.2s; */
+    /* border: 1px solid #f1f1f4; */
+    background: #fff;
+}
+
+.route-card:hover {
+    /* box-shadow: 0 8px 32px rgba(31, 24, 57, 0.13), 0 1.5px 6px rgba(31,24,57,0.06); */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    transition: box-shadow 0.2s;
+}
+
+.route-card .text-purple {
+    color: var(--purple-1);
+}
+
+.route-card .btn-outline-primary {
+    border-radius: 8px;
+    border: 1.5px solid #e6e9ee;
+    color: #1f2937;
+    font-weight: 500;
+    background: #fff;
+    transition: background 0.2s, color 0.2s;
+}
+
+.route-card .btn-outline-primary:hover {
+    background: rgb(249, 249, 249);
+    /* Change to your desired color */
+    border-color: rgb(213, 213, 213);
+    /* Match border to background */
+}
+
+/* Responsiveness */
+@media (max-width: 991.98px) {
+    .search-card {
+        padding: 2rem 1rem;
+    }
+
+    .route-card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .search-card {
+        padding: 1rem;
+    }
+
+    .route-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .btn-search {
+        font-size: 1rem;
+        padding: 12px 0;
+    }
+}

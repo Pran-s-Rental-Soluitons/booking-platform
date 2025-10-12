@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void {
+        Schema::create('bus_schedules', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('bus_id')->constrained('buses')->onDelete('cascade');
+            $table->foreignId('route_id')->constrained('routes')->onDelete('cascade');
+            $table->time('departure_time');
+            $table->time('arrival_time');
+            $table->string('duration')->nullable();
+            $table->date('travel_date');
+            $table->decimal('base_fare', 10, 2);
+            $table->integer('available_seats')->default(0);
+            $table->enum('status', ['scheduled', 'cancelled', 'completed'])->default('scheduled');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void {
+        Schema::dropIfExists('bus_schedules');
+    }
+};

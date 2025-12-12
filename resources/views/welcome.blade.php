@@ -12,7 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jomolhari&display=swap" rel="stylesheet">
 
-    @vite(['resources/css/landing.css'])
+
+    <link rel="stylesheet" href="{{ asset('/css/landing.css') }}">
+
     <style>
         .calendar-navigation {
             background: linear-gradient(135deg, #9A18FF 0%, #5C0E99 100%);

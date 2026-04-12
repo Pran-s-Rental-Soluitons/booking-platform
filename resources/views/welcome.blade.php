@@ -11,10 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jomolhari&display=swap" rel="stylesheet">
-
-
+    <link rel="shortcut icon" href="{{ asset('images/favicon.jpeg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('/css/landing.css') }}">
-
     <style>
         .calendar-navigation {
             background: linear-gradient(135deg, #9A18FF 0%, #5C0E99 100%);
@@ -108,10 +106,10 @@
                 </button>
 
                 <nav class="main-nav" id="main-nav">
-                    <a href="#" class="nav-link">Book Ride</a>
-                    <a href="#" class="nav-link">Vehicles</a>
-                    <a href="#" class="nav-link">About Us</a>
-                    <button class="btn-get-price-nav">GET PRICE</button>
+                    <a href="#location" class="nav-link">Book Ride</a>
+                    <a href="#vehicles" class="nav-link">Vehicles</a>
+                    <a href="#about" class="nav-link">About Us</a>
+                    <button class="btn-get-price-nav" onclick="document.getElementById('location').scrollIntoView({behavior: 'smooth'})">GET PRICE</button>
                 </nav>
 
                 <div class="header-actions" id="header-actions">
@@ -252,7 +250,7 @@
     </section>
 
     <!-- Vehicles Section -->
-    <section class="vehicles-section">
+    <section class="vehicles-section" id="vehicles">
         <div class="container">
             <h2 class="section-title-xl">Ride the XPerience !!</h2>
 
@@ -269,6 +267,40 @@
             </div>
 
             <div class="vehicles-grid">
+                @forelse($vehicles as $vehicle)
+                <div class="vehicle-card {{ $vehicle->is_featured ? 'featured' : '' }}">
+                    @if($vehicle->is_featured)
+                    <div class="most-popular-badge">Most Popular</div>
+                    @endif
+                    <div class="vehicle-image-wrapper">
+                        <img src="{{ $vehicle->image_url ?? 'https://api.builder.io/api/v1/image/assets/TEMP/2d6fbcfe226207e21f76c56e6b7c3906d03a2ae8?width=950' }}" alt="{{ $vehicle->name }}" class="vehicle-image">
+                    </div>
+                    <h3 class="vehicle-name">{{ $vehicle->name }}</h3>
+                    <div class="vehicle-price">
+                        <span class="price">₹{{ $vehicle->price_per_km }}</span>
+                        <span class="price-unit">per KM</span>
+                    </div>
+                    <div class="vehicle-rating">
+                        <span class="stars">{{ str_repeat('★', floor($vehicle->rating)) }}{{ str_repeat('☆', 5 - floor($vehicle->rating)) }}</span>
+                        <span class="rating-text">{{ $vehicle->rating }} ({{ $vehicle->reviews_count }} reviews)</span>
+                    </div>
+                    <p class="vehicle-best-for">Best for: {{ $vehicle->best_for }}</p>
+                    <ul class="vehicle-features">
+                        @if($vehicle->features)
+                            @foreach($vehicle->features as $feature)
+                            <li>{{ $feature }}</li>
+                            @endforeach
+                        @else
+                            <li>🪑 12 Seats</li>
+                            <li>💺 Maximum space</li>
+                            <li>🪑 Reclining seats</li>
+                            <li>🎵 Entertainment system</li>
+                        @endif
+                    </ul>
+                    <button class="btn-book-now" onclick="document.getElementById('location').scrollIntoView({behavior: 'smooth'})">Book Now</button>
+                </div>
+                @empty
+                <!-- Fallback to static if no vehicles -->
                 <div class="vehicle-card">
                     <div class="vehicle-image-wrapper">
                         <img src="https://api.builder.io/api/v1/image/assets/TEMP/2d6fbcfe226207e21f76c56e6b7c3906d03a2ae8?width=950" alt="Tempo Traveller" class="vehicle-image">
@@ -289,83 +321,36 @@
                         <li>🪑 Reclining seats</li>
                         <li>🎵 Entertainment system</li>
                     </ul>
-                    <button class="btn-book-now">Book Now</button>
+                    <button class="btn-book-now" onclick="document.getElementById('location').scrollIntoView({behavior: 'smooth'})">Book Now</button>
                 </div>
-
-                <div class="vehicle-card featured">
-                    <div class="most-popular-badge">Most Popular</div>
-                    <div class="decorative-stars stars-badge">
-                        <svg width="105" height="62" viewBox="0 0 178 138" fill="none">
-                            <path d="M76.7603 64.4452L107.414 51.549L116.849 56.008L113.742 62.1912L113.698 64.3519L97.7741 67.4738L104.89 92.9799L84.8573 72.6964L76.7603 64.4452Z" fill="url(#star-gradient-2)" />
-                            <defs>
-                                <linearGradient id="star-gradient-2" x1="95.6433" y1="61.892" x2="94.8531" y2="75.7006" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#9A18FF" />
-                                    <stop offset="1" stop-color="#5C0E99" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <div class="vehicle-image-wrapper">
-                        <img src="https://api.builder.io/api/v1/image/assets/TEMP/e621d459c5210337db23c83f86a6e66654e83ab6?width=942" alt="Force Urbania" class="vehicle-image">
-                    </div>
-                    <h3 class="vehicle-name">Force Urbania</h3>
-                    <div class="vehicle-price">
-                        <span class="price">₹15</span>
-                        <span class="price-unit">per KM</span>
-                    </div>
-                    <div class="vehicle-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-text">4.7 (985 reviews)</span>
-                    </div>
-                    <p class="vehicle-best-for">Best for: Large groups & tours</p>
-                    <ul class="vehicle-features">
-                        <li>🪑 12 Seats</li>
-                        <li>💺 Maximum space</li>
-                        <li>🪑 Reclining seats</li>
-                        <li>🎵 Entertainment system</li>
-                    </ul>
-                    <button class="btn-book-now">Book Now</button>
-                </div>
-
-                <div class="vehicle-card">
-                    <div class="decorative-stars stars-right">
-                        <svg width="105" height="62" viewBox="0 0 178 138" fill="none">
-                            <path d="M76.7603 64.4452L107.414 51.549L116.849 56.008L113.742 62.1912L113.698 64.3519L97.7741 67.4738L104.89 92.9799L84.8573 72.6964L76.7603 64.4452Z" fill="url(#star-gradient-3)" />
-                            <defs>
-                                <linearGradient id="star-gradient-3" x1="95.6433" y1="61.892" x2="94.8531" y2="75.7006" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#9A18FF" />
-                                    <stop offset="1" stop-color="#5C0E99" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <div class="vehicle-image-wrapper">
-                        <img src="https://api.builder.io/api/v1/image/assets/TEMP/f7f0b35ff042206e08ea220917d7cc6e28e9ab0d?width=900" alt="Caravan" class="vehicle-image">
-                    </div>
-                    <h3 class="vehicle-name">Caravan</h3>
-                    <div class="vehicle-price">
-                        <span class="price">₹15</span>
-                        <span class="price-unit">per KM</span>
-                    </div>
-                    <div class="vehicle-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-text">4.7 (985 reviews)</span>
-                    </div>
-                    <p class="vehicle-best-for">Best for: Large groups & tours</p>
-                    <ul class="vehicle-features">
-                        <li>🪑 12 Seats</li>
-                        <li>💺 Maximum space</li>
-                        <li>🪑 Reclining seats</li>
-                        <li>🎵 Entertainment system</li>
-                    </ul>
-                    <button class="btn-book-now">Book Now</button>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
 
+    <!-- Dynamic Trip Posters Section -->
+    @if(count($tripPosters) > 0)
+    <section class="trip-posters-section" id="trips" style="padding: 60px 0; background: #f9f9f9;">
+        <div class="container">
+            <h2 class="section-title-xl" style="text-align: center; margin-bottom: 40px;">Special Trip Packages</h2>
+            <div class="trip-posters-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                @foreach($tripPosters as $poster)
+                <div class="trip-poster-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                    <img src="{{ asset('storage/' . $poster->poster_image) }}" alt="{{ $poster->title }}" style="width: 100%; height: 400px; object-fit: cover;">
+                    <div style="padding: 20px; text-align: center;">
+                        <h3 style="font-size: 24px; margin-bottom: 15px; color: #333;">{{ $poster->title }}</h3>
+                        <a href="tel:{{ $poster->call_number }}" class="btn-book-now" style="display: inline-block; text-decoration: none; padding: 12px 30px; background: linear-gradient(135deg, #9A18FF 0%, #5C0E99 100%); color: white; border-radius: 30px; font-weight: bold;">Book Now (Call)</a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+
     <!-- Why Rentlee Section -->
-    <section class="benefits-section">
+    <section class="benefits-section" id="about">
         <div class="container">
             <h2 class="section-title-benefits">Why Rentlee ?</h2>
 
@@ -440,7 +425,7 @@
         </div>
     </footer>
 
-   <script>
+  <script>
 /* ================================
    SIMPLE WORKING CALENDAR SYSTEM
    ================================ */
@@ -462,17 +447,18 @@ function renderCalendar() {
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
-    document.getElementById('calendar-month-year').textContent =
-        `${monthNames[month]} ${year}`;
+    const monthYearEl = document.getElementById('calendar-month-year');
+    if (monthYearEl) monthYearEl.textContent = `${monthNames[month]} ${year}`;
 
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const daysInPrevMonth = new Date(year, month, 0).getDate();
 
     const calendarBody = document.getElementById("calendar-body");
+    if (!calendarBody) return;
     calendarBody.innerHTML = "";
 
-    // PREVIOUS MONTH DAYS
+    // Previous month
     for (let i = firstDay - 1; i >= 0; i--) {
         const cell = document.createElement("div");
         cell.className = "calendar-cell disabled";
@@ -480,43 +466,30 @@ function renderCalendar() {
         calendarBody.appendChild(cell);
     }
 
-    // CURRENT MONTH DAYS
+    // Current month
     for (let day = 1; day <= daysInMonth; day++) {
         const cell = document.createElement("div");
         cell.className = "calendar-cell";
         cell.textContent = day;
 
         const thisDate = new Date(year, month, day);
-
-        // highlight today
         const today = new Date();
-        if (
-            today.getDate() === day &&
-            today.getMonth() === month &&
-            today.getFullYear() === year
-        ) {
+
+        if (today.toDateString() === thisDate.toDateString()) {
             cell.classList.add("today");
         }
 
-        // highlight selected date
-        if (
-            selectedDate &&
-            selectedDate.getDate() === day &&
-            selectedDate.getMonth() === month &&
-            selectedDate.getFullYear() === year
-        ) {
+        if (selectedDate && selectedDate.toDateString() === thisDate.toDateString()) {
             cell.classList.add("selected");
         }
 
         cell.addEventListener("click", () => selectDate(thisDate));
-
         calendarBody.appendChild(cell);
     }
 
-    // NEXT MONTH DAYS TO FILL GRID (42 total)
+    // Next month
     const totalCells = calendarBody.children.length;
     const nextDays = 42 - totalCells;
-
     for (let i = 1; i <= nextDays; i++) {
         const cell = document.createElement("div");
         cell.className = "calendar-cell disabled";
@@ -526,21 +499,16 @@ function renderCalendar() {
 }
 
 function setupCalendarNavigation() {
-    document.getElementById("prev-month").onclick = () => {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
-    };
+    const prevBtn = document.getElementById("prev-month");
+    const nextBtn = document.getElementById("next-month");
 
-    document.getElementById("next-month").onclick = () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar();
-    };
+    if (prevBtn) prevBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
+    if (nextBtn) nextBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
 }
 
 function selectDate(dateObj) {
     selectedDate = dateObj;
 
-    // Store YYYY-MM-DD in Asia/Kolkata timezone
     const options = { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' };
     const parts = new Intl.DateTimeFormat('en-GB', options).formatToParts(selectedDate);
 
@@ -549,13 +517,12 @@ function selectDate(dateObj) {
     const day = parts.find(p => p.type === 'day').value;
 
     const localDate = `${year}-${month}-${day}`;
-    document.getElementById("selected-travel-date").value = localDate;
+    const travelInput = document.getElementById("selected-travel-date");
+    if (travelInput) travelInput.value = localDate;
 
     console.log("Selected date (Asia/Kolkata):", localDate);
-
     renderCalendar();
 }
-
 
 /* ================================
    FORM VALIDATION + SUBMISSION
@@ -563,7 +530,6 @@ function selectDate(dateObj) {
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeCalendar();
-    initMap();
 
     const btnGetPrice = document.getElementById("btn-get-price-form");
     if (btnGetPrice) btnGetPrice.addEventListener("click", submitEnquiry);
@@ -586,11 +552,11 @@ document.addEventListener("DOMContentLoaded", () => {
 async function submitEnquiry(e) {
     e.preventDefault();
 
-    const from = document.getElementById("from").value.trim();
-    const to = document.getElementById("to").value.trim();
-    const travelDate = document.getElementById("selected-travel-date").value;
-    const seating = document.getElementById("seating-capacity").value;
-    const phone = document.getElementById("contact-number").value.trim();
+    const from = document.getElementById("from")?.value.trim();
+    const to = document.getElementById("to")?.value.trim();
+    const travelDate = document.getElementById("selected-travel-date")?.value;
+    const seating = document.getElementById("seating-capacity")?.value;
+    const phone = document.getElementById("contact-number")?.value.trim();
 
     if (!from) return alert("Please enter departure location");
     if (!to) return alert("Please enter destination location");
@@ -598,7 +564,6 @@ async function submitEnquiry(e) {
     if (!seating) return alert("Please select seating capacity");
     if (!/^[0-9]{10}$/.test(phone)) return alert("Please enter valid 10-digit phone number");
 
-    // extract distance if available
     let distanceKm = null;
     const distanceResult = document.getElementById("distance-result");
     if (distanceResult) {
@@ -607,35 +572,41 @@ async function submitEnquiry(e) {
     }
 
     const btn = document.getElementById("btn-get-price-form");
-    btn.disabled = true;
-    btn.textContent = "Submitting...";
-
-    const res = await fetch("{{ route('enquiry.store') }}", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").content
-        },
-        body: JSON.stringify({
-            from,
-            to,
-            travel_date: travelDate,
-            seating_capacity: seating,
-            phone_number: phone,
-            distance_km: distanceKm
-        })
-    });
-
-    const data = await res.json();
-
-    if (res.ok && data.success) {
-        alert(data.message);
-    } else {
-        alert("Failed to submit enquiry");
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Submitting...";
     }
 
-    btn.disabled = false;
-    btn.textContent = "GET PRICE";
+    try {
+        const res = await fetch("{{ route('enquiry.store') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").content
+            },
+            body: JSON.stringify({
+                from,
+                to,
+                travel_date: travelDate,
+                seating_capacity: seating,
+                phone_number: phone,
+                distance_km: distanceKm
+            })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) alert(data.message);
+        else alert("Failed to submit enquiry");
+    } catch (err) {
+        console.error(err);
+        alert("An error occurred while submitting enquiry");
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.textContent = "GET PRICE";
+        }
+    }
 }
 
 /* ================================
@@ -643,37 +614,33 @@ async function submitEnquiry(e) {
    ================================ */
 
 function initMap() {
-    window.map = new google.maps.Map(document.getElementById("route-map"), {
+    const mapEl = document.getElementById("route-map");
+    if (!mapEl) return;
+
+    window.map = new google.maps.Map(mapEl, {
         center: { lat: 19.7515, lng: 75.7139 },
         zoom: 7
     });
 
     window.directionsService = new google.maps.DirectionsService();
-    window.directionsRenderer = new google.maps.DirectionsRenderer({
-        map: map
-    });
+    window.directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
 }
 
 function showRouteOnMap(from, to) {
-    if (!from || !to) return;
+    if (!from || !to || !window.directionsService || !window.directionsRenderer) return;
 
-    directionsService.route(
-        {
-            origin: from,
-            destination: to,
-            travelMode: google.maps.TravelMode.DRIVING
-        },
-        (response, status) => {
-            if (status === "OK") {
-                directionsRenderer.setDirections(response);
-            }
-        }
-    );
+    directionsService.route({
+        origin: from,
+        destination: to,
+        travelMode: google.maps.TravelMode.DRIVING
+    }, (response, status) => {
+        if (status === "OK") directionsRenderer.setDirections(response);
+    });
 }
 
 async function calculateDistance() {
-    const from = document.getElementById("from").value.trim();
-    const to = document.getElementById("to").value.trim();
+    const from = document.getElementById("from")?.value.trim();
+    const to = document.getElementById("to")?.value.trim();
     const distanceResult = document.getElementById("distance-result");
 
     if (!from || !to) {
@@ -681,37 +648,40 @@ async function calculateDistance() {
         return;
     }
 
-    distanceResult.innerHTML = "<div>Calculating distance...</div>";
+    if (distanceResult) distanceResult.innerHTML = "<div>Calculating distance...</div>";
 
-    const res = await fetch("{{ route('distance.calculate') }}", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").content
-        },
-        body: JSON.stringify({ from, to })
-    });
+    try {
+        const res = await fetch("{{ route('distance.calculate') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector("meta[name='csrf-token']").content
+            },
+            body: JSON.stringify({ from, to })
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    if (data.success) {
-        distanceResult.innerHTML = `
-            <div>
-                Distance: <strong>${data.distanceText}</strong><br>
-                Duration: ${data.duration}
-            </div>
-        `;
-
-        showRouteOnMap(from, to);
-    } else {
-        distanceResult.innerHTML = "<div>Error calculating distance</div>";
+        if (data.success) {
+            if (distanceResult) distanceResult.innerHTML = `
+                <div>
+                    Distance: <strong>${data.distanceText}</strong><br>
+                    Duration: ${data.duration}
+                </div>
+            `;
+            showRouteOnMap(from, to);
+        } else {
+            if (distanceResult) distanceResult.innerHTML = "<div>Error calculating distance</div>";
+        }
+    } catch (err) {
+        console.error(err);
+        if (distanceResult) distanceResult.innerHTML = "<div>Error calculating distance</div>";
     }
 }
 </script>
 
-
-    <!-- Google Maps JS: make sure Maps JavaScript API is enabled in your Cloud project -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVQPe_ZEPz20V63SzhGLW8yG4wt3sgXEU&libraries=places&callback=initMap" async defer></script>
+<!-- Google Maps JS -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVQPe_ZEPz20V63SzhGLW8yG4wt3sgXEU&libraries=places&callback=initMap" async defer></script>
 
 </body>
 

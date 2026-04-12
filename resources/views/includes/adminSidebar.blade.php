@@ -14,10 +14,28 @@
     </li>    
      <li class="nav-item">
       <a class="nav-link" href="{{route('users.index')}}">
-        <i class="mdi mdi-home menu-icon"></i>
+        <i class="mdi mdi-account menu-icon"></i>
         <span class="menu-title">User Management</span>
       </a>
     </li>    
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('vehicles.index')}}">
+        <i class="mdi mdi-bus menu-icon"></i>
+        <span class="menu-title">Vehicle Management</span>
+      </a>
+    </li>    
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('trip-posters.index')}}">
+        <i class="mdi mdi-image menu-icon"></i>
+        <span class="menu-title">Trip Posters</span>
+      </a>
+    </li>    
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('leads.index')}}">
+        <i class="mdi mdi-email menu-icon"></i>
+        <span class="menu-title">Leads / Inquiries</span>
+      </a>
+    </li>
     <!-- <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <i class="mdi mdi-circle-outline menu-icon"></i>

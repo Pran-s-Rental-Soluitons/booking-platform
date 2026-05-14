@@ -19,7 +19,11 @@ class CreateAdminUserSeeder extends Seeder
             ['email' => 'admin@rentlee.in'],
             [
                 'name' => 'Rentlee Admin', 
-                'password' => bcrypt('Pass@123')
+                'password' => bcrypt('Pass@123'),
+                'gender' => 'Other',
+                'dob' => '1990-01-01',
+                'home_town' => 'Admin City',
+                'mobile_no' => '9999999999'
             ]
         );
         

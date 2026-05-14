@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Storage;
 
 class TripPosterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:trip-poster-list|trip-poster-create|trip-poster-edit|trip-poster-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:trip-poster-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:trip-poster-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:trip-poster-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $posters = TripPoster::latest()->get();

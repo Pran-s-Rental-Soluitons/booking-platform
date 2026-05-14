@@ -7,6 +7,11 @@ use App\Models\Lead;
 
 class LeadController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:lead-list', ['only' => ['index']]);
+    }
+
     public function index()
     {
         $leads = Lead::latest()->paginate(20);

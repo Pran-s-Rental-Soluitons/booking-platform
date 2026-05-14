@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:vehicle-list|vehicle-create|vehicle-edit|vehicle-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:vehicle-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:vehicle-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:vehicle-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $vehicles = Vehicle::latest()->paginate(10);
